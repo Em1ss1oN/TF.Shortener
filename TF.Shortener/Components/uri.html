@@ -1,13 +1,14 @@
 ﻿<div>
     <form (ngSubmit)="onSubmit()" name="uriForm" #uriForm="ngForm">
-        <div class="col-md-8 col-md-offset-2 margin" [hidden]="inProgress" id="uri-div">
+        <div class="col-md-8 col-md-offset-2 margin" id="uri-div">
             <div class="margin">
-                <input type="url" [readonly]="generated" #inputLink id="inputLink" name="inputLink" class="form-control text-center" 
+                <input type="url" [readonly]="generated || inProgress" #inputLink id="inputLink" name="inputLink" class="form-control text-center" 
                        required [(ngModel)]="link" placeholder="http://example.com">
                 <p *ngIf="inputLink.errors?.url">Not a valid Url</p>
             </div>
             <div [hidden]="generated" class="margin col-md-8 col-md-offset-2">
-                <button type="submit" class="btn btn-success uriBtn" [disabled]="!uriForm.form.valid">Shorten!</button>
+                <button type="submit" class="btn btn-success uriBtn" 
+                        [disabled]="!uriForm.form.valid || inProgress" [class.btn-progress]="inProgress">Shorten!</button>
             </div>
             <div [hidden]="!generated" class="margin col-md-8 col-md-offset-2">
                 <button type="button" class="btn btn-default uriBtn" ngxClipboard [cbContent]="link">Copy to Clipboard.</button>
@@ -17,11 +18,4 @@
             </div>
         </div>
     </form>
-    <div class="margin col-md-8 col-md-offset-2" [hidden]="!inProgress">
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-            </div>
-        </div>
-    </div>
 </div>

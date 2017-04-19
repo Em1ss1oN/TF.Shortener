@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     registerError = false;
     registerErrorText;
     loggedIn = false;
+    inProgress = false;
     user: User;
 
     constructor(private service: MembershipService, private router: Router) { }
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     }
 
     onLogin() {
+        this.inProgress = true;
         this.service.login(this.login).subscribe(result => {
                 if (result.Success) {
                     this.loginError = false;
@@ -38,10 +40,12 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.setLoginError(result.Message);
                 }
+                this.inProgress = false;
             },
             error => {
                 console.error(error);
                 this.setLoginError(error);
+                this.inProgress = false;
             });
     }
 
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
     }
 
     onRegister() {
+        this.inProgress = true;
         this.service.register(this.registration).subscribe(result => {
                 if (result.Success) {
                     this.registerError = false;
@@ -59,10 +64,12 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.setRegisterError(result.Message);
                 }
+                this.inProgress = false;
             },
             error => {
                 console.error(error);
                 this.setRegisterError(error);
+                this.inProgress = false;
             });
     }
 

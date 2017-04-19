@@ -16,7 +16,8 @@
                            name="passwordConfirm" #passwordConfirm="ngModel" required>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>
+                    <button class="btn btn-primary" [disabled]="!registerForm.form.valid || inProgress" 
+                            [class.btn-progress]="inProgress">Register</button>
                 </div>
             </form>
             <div [hidden]="!registerError" class="alert alert-danger">
@@ -36,7 +37,8 @@
                     <input type="password" placeholder="Password" class="form-control" name="loginPassword" #loginPassword="ngModel"
                            required [(ngModel)]="login.Password">
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Sign in</button>
+                <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid || inProgress" 
+                        [class.btn-progress]="inProgress">Sign in</button>
             </form>
             <div [hidden]="!loginError" class="alert alert-danger">
                 {{loginErrorText}}
