@@ -1,0 +1,50 @@
+﻿<ul *ngIf="!loggedIn" class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+        <div class="dropdown-menu navbar-inverse">
+            <form class="navbar-form" #registerForm="ngForm" name="registerForm" (ngSubmit)="onRegister()">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="registration.Login"
+                           name="username" #username="ngModel" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="registration.Password"
+                           name="password" #password="ngModel" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Confirm Password" [(ngModel)]="registration.ConfirmPassword"
+                           name="passwordConfirm" #passwordConfirm="ngModel" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>
+                </div>
+            </form>
+            <div [hidden]="!registerError" class="alert alert-danger">
+                {{registerErrorText}}
+            </div>
+        </div>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        <div class="dropdown-menu navbar-inverse">
+            <form class="navbar-form" #loginForm="ngForm" name="loginForm" (ngSubmit)="onLogin()">
+                <div class="form-group">
+                    <input type="text" placeholder="UserName" class="form-control" name="loginLogin" #loginLogin="ngModel"
+                           required [(ngModel)]="login.Login">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control" name="loginPassword" #loginPassword="ngModel"
+                           required [(ngModel)]="login.Password">
+                </div>
+                <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Sign in</button>
+            </form>
+            <div [hidden]="!loginError" class="alert alert-danger">
+                {{loginErrorText}}
+            </div>
+        </div>
+    </li>
+</ul>
+<ul *ngIf="loggedIn" class="nav navbar-nav navbar-right">
+    <li><a href="#" routerLink="/linkslist"><span class="glyphicon glyphicon-user"></span> Welcome, {{user.Login}}!</a></li>
+    <li><a href="#" (click)="logout()"><span class="glyphicon "></span> Logout</a></li>
+</ul>

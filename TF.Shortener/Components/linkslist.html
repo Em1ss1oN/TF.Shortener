@@ -1,0 +1,25 @@
+﻿<div>
+    <h2>All {{user.Login}}'s Links.</h2>
+    <div class="table-responsive" [hidden]="error || inProgress">
+        <table class="table table-striped table-hover">
+            <thead>
+            <th>Short Link</th>
+            <th>Initial Link</th>
+            <th>Created On</th>
+            <th>Following Count</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let link of links | async" >
+                <td><a [href]="link.getShortUriString()">/{{link.ShortPath}}</a></td>
+                <td><a [href]="link.Uri">{{link.Uri}}</a></td>
+                <td>{{link.CreateDate | date:'short'}}</td>
+                <td>{{link.Count}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="!error || inProgress">
+        {{errorText}}
+    </div>
+    <div [hidden]="!inProgress">Processing...</div>
+</div>

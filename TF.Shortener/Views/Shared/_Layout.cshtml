@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title TF Url Shortener</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+
+    <script src="/libs/core-js/client/shim.min.js"></script>
+    <script src="/libs/zone.js/dist/zone.js"></script>
+    <script src="/libs/systemjs/dist/system.src.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="~/Scripts/systemjs.config.js"></script>
+    <script>
+        System.import('../Scripts/main').catch(function(err) {
+            console.error(err);
+        });
+    </script>
+
+</head>
+<body>
+
+    @RenderBody()
+<footer>
+    <div class="footer">
+        <p>&copy; @DateTime.Now.Year - TF Uri Shortener</p>
+    </div>
+</footer>
+    @Scripts.Render("https://cdn.rawgit.com/zenorocha/clipboard.js/v1.6.0/dist/clipboard.min.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
