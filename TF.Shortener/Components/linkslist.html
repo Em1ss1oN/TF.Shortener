@@ -10,8 +10,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let link of links | async" >
-                <td><a [href]="link.getShortUriString()">/{{link.ShortPath}}</a></td>
-                <td><a [href]="link.Uri">{{link.Uri}}</a></td>
+                <td><a [href]="link.getShortUriString()" target="_blank">/{{link.ShortPath}}</a></td>
+                <td><a [href]="link.Uri" target="_blank">{{link.Uri}}</a></td>
                 <td>{{link.CreateDate | date:'short'}}</td>
                 <td>{{link.Count}}</td>
             </tr>
